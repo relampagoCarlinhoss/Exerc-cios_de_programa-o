@@ -1,32 +1,36 @@
 #include <iostream> 
 using namespace std;
 
-long long fatorial(long long n){
-	long long fatorial = 1; 
-	for(long long i = 1; i <= n;i++){ 
-		fatorial *= i;  
-	}
-	return fatorial; 
+unsigned long long comb(unsigned long long n){
+	unsigned long long res = 0; 
+	n += 2;  
+	res = (n*(n - 1))/2; 
+
+	return res;
 }
 
-	int main(){
-	long long soma, max; 
+int main(){
+	unsigned long long soma, max; 
 	cin >> soma >> max; 
-
-	long long  b_lim = max + 1; 
-	long long sobra = soma - 3*max; 
-	long long res = 0;
 	
 	if(3*max < soma){ 
 		cout << "0";
 		return 0;	
 	}
-	
-	res = (fatorial(sobra + 2)/(fatorial (sobra)*2))*3;
-	long long exc = (fatorial(b_lim + 2)/fatorial(b_lim)*2)*3;
-	long long inc = (fatorial(soma - b_lim*2 + 2)/fatorial(soma - b_lim)*2)*3;		
- 	res -= exc + inc;
+	soma -= 3; 
+	max  -= 1; 
 
-		cout << res; 
+	unsigned long long  b_lim = max + 1; 
+	unsigned long long sobra1 = soma - b_lim;	
+	unsigned long long sobra2 = soma - b_lim*2; 
+	unsigned long long res = 0;
+	
+	unsigned long long total_casos = comb(soma); 
+	unsigned long long invalido1_casos = soma >= b_lim ? comb(sobra1)*3 : 0;
+	unsigned long long invalido2_casos = soma >= b_lim*2 ?  comb(sobra2)*3: 0;		
+		
+	res = total_casos - invalido1_casos + invalido2_casos;	
+
+	cout << res;
 	return 0;
 }
