@@ -46,6 +46,6 @@ int main(){
 		if(valido) maior_soma = max(maior_soma, soma);
 	}
 
-	cout << maior_soma; 
+	cout << (maior_soma == -1 ? 0 :  maior_soma); 
 	return 0;
 }
